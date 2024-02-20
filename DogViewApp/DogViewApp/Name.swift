@@ -8,7 +8,7 @@
 import Foundation
 
 struct dogResponce: Codable {
-    var dogList: [String: [String]]
+    var message: [String: [String]]
 }
 
 enum dogError: Error {

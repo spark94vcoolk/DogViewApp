@@ -9,21 +9,11 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",for: indexPath)
-        cell.textLabel?.text = dogs[indexPath.row]
-        return cell
-    }
-    
+    var dogResponce: dogResponce?
     let dog = Dog()
+    var dogs: [String] = []
     
     @IBOutlet weak var DogList: UITableView!
-    
-    var dogs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +27,25 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     func displayDogs()  {
         Task{
             let result = await dog.setDogList()
-            
             switch result {
-                
-            case .success(_):
-                <#code#>
-            case .failure(_):
-                <#code#>
+            case .success(let response):
+                self.dogResponce = response
+                self.dogs = response.message.keys.sorted()
+                self.DogList.reloadData()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
             }
-            
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dogResponce?.message.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",for: indexPath)
+        cell.textLabel?.text = dogs[indexPath.row]
+        return cell
     }
     
 }
