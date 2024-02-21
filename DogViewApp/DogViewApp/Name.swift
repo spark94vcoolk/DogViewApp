@@ -8,11 +8,7 @@
 import Foundation
 
 struct dogResponce: Codable {
-    var message: [String: [String]]
-    
-    struct dogImage: Codable {
-    var message: [String: [String]]
-    }
+    let message: [String: [String]]
 }
 
 enum dogError: Error {

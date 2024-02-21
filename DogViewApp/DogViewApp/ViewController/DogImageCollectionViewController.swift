@@ -12,7 +12,7 @@ import AlamofireImage
 class DogImageCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     var dogResponce: dogResponce?
-    var dogs: [String] = []
+    var breeds: [String] = []
     var selectedDogName: String?
     
     @IBOutlet weak var dogImageCollection: UICollectionView!
@@ -20,14 +20,19 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dogImageCollection.delegate = self
+        dogImageCollection.dataSource = self
+        
         if let dogName = selectedDogName {
             navigationItem.title = dogName
+            
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return dogResponce?.message.count ?? 0
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
