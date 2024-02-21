@@ -7,11 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     var dogResponce: dogResponce?
     let dog = Dog()
-    var dogs: [String] = []
+    var breeds = [String]()
+  //  var dogs: [String] = []
+    var selectedDogName: String?
     
     @IBOutlet weak var DogList: UITableView!
     
@@ -28,9 +30,9 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         Task{
             let result = await dog.setDogList()
             switch result {
-            case .success(let response):
-                self.dogResponce = response
-                self.dogs = response.message.keys.sorted()
+            case .success(let dogBreeds):
+                self.dogResponce = dogBreeds
+                self.breeds = dogResponce?.message.keys.sorted() ?? []
                 self.DogList.reloadData()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -39,14 +41,27 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dogResponce?.message.count ?? 0//ここのコードを確認
+        return breeds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",for: indexPath)
-        cell.textLabel?.text = dogs[indexPath.row]
+        // cell.textLabel?.text = dogs[indexPath.row]
+        let doglist =
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       selectedDogName = dogs[indexPath.row]
+        performSegue(withIdentifier: "toCollection", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCollection" {
+            if let destinationVC = segue.destination as? DogImageCollectionViewController {
+                destinationVC.selectedDogName = selectedDogName
+                
+            }
+        }
+    }
+    
 }
-

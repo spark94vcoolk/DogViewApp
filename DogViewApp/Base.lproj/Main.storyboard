@@ -28,7 +28,7 @@
         <!--DogLIstView Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="DogLIstView Controller" customClass="ViewController" customModule="DogViewApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="DogLIstView Controller" customClass="DogListViewController" customModule="DogViewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,6 +44,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Kiv-eO-YPo" kind="show" identifier="toCollection" id="e5S-xC-qod"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -79,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="25T-qg-vDn">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Trn-3C-Kj1">
                                     <size key="itemSize" width="128" height="128"/>
@@ -88,7 +91,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="smB-ma-YJC">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DogCollectionViewCell" id="smB-ma-YJC" customClass="DogCollectionViewCell" customModule="DogViewApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uc3-ov-PcB">
@@ -106,6 +109,9 @@
                                                 <constraint firstItem="r67-Bg-1Jc" firstAttribute="leading" secondItem="uc3-ov-PcB" secondAttribute="leading" id="dw7-dZ-SZL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="DogCollectionImage" destination="r67-Bg-1Jc" id="ek6-PB-SeH"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -123,6 +129,7 @@
                             <constraint firstItem="Yp7-9D-EF1" firstAttribute="bottom" secondItem="25T-qg-vDn" secondAttribute="bottom" id="oS7-jd-tLy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9HN-3O-wdm"/>
                     <connections>
                         <outlet property="dogImageCollection" destination="25T-qg-vDn" id="1Kz-Sm-rTt"/>
                     </connections>
