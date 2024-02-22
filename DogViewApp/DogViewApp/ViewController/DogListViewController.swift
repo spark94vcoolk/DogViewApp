@@ -47,13 +47,11 @@ class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",for: indexPath)
         cell.textLabel?.text = breeds[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedDogName = breeds[indexPath.row]
-    }
-    func tableView(_ tableView: UITableView, didHightLight indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         selectedDogName = breeds[indexPath.row]
     }
     
