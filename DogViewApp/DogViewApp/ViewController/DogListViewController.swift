@@ -40,6 +40,7 @@ class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         }
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return breeds.count
     }

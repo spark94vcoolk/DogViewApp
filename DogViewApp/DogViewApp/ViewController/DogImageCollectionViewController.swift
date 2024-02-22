@@ -26,16 +26,27 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
         
         if let dogName = selectedDogName {
             navigationItem.title = dogName
-            fetchDogImege(for: dogName)
+            
+        }
+        Task{
+            await fetchDogImege()
         }
     }
     
-    func fetchDogImege(for dogName: String) {
-        let urlString = "https://dog.ceo/api/breed/\(dogName)/images"
-    print(urlString)
+    func fetchDogImege() async {
+        guard let dogName = selectedDogName else {
+            return
+        }
         
+        let urlString = "https://dog.ceo/api/breed/\(dogName)/images"
+        
+        do {
+            let response = try await AF.request(urlString).serializingDecodable(DogImagesResponse.self).value
+            print(response)
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dogResponce?.message.count ?? 0
@@ -51,3 +62,4 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
     
     
 }
+
