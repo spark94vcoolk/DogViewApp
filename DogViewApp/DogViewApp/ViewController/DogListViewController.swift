@@ -55,8 +55,6 @@ class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         selectedDogName = breeds[indexPath.row]
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCollection" {
             if let destinationVC = segue.destination as? DogImageCollectionViewController {

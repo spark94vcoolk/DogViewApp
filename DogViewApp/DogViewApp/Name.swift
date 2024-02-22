@@ -11,6 +11,11 @@ struct dogResponce: Codable {
     let message: [String: [String]]
 }
 
+struct DogImageResponse: Codable {
+    let message: [String]
+    let status: String
+}
+
 enum dogError: Error {
     case invalidError
     case decodeError
