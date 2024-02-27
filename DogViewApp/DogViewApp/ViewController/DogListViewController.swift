@@ -23,11 +23,12 @@ class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         DogList.delegate = self
         DogList.dataSource = self
         
-        displayDogs()
+        Task {
+           await displayDogs()
+        }
     }
     
-    func displayDogs()  {
-        Task{
+    func displayDogs() async {
             let result = await dog.setDogList()
             switch result {
             case .success(let dogBreeds):
@@ -38,7 +39,6 @@ class DogListViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 print("Error: \(error.localizedDescription)")
             }
         }
-    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

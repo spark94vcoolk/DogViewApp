@@ -11,9 +11,8 @@ struct dogResponce: Codable {
     let message: [String: [String]]
 }
 
-struct DogImagesResponse: Decodable {
+struct DogImagesResponse: Codable {
     let message: [String]
-    let status: String
 }
 
 enum dogError: Error {

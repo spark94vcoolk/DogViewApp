@@ -8,21 +8,17 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-
+    
 class DogImageCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
-    var dogResponce: dogResponce?
-    var breeds: [String] = []
-    var DogCollectionImage: [String] = []
+    
+    var dogImages: [URL] = []
     var selectedDogName: String?
     
     @IBOutlet weak var dogImageCollection: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dogImageCollection.delegate = self
-        dogImageCollection.dataSource = self
         
         if let dogName = selectedDogName {
             navigationItem.title = dogName
@@ -43,23 +39,24 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
         do {
             let response = try await AF.request(urlString).serializingDecodable(DogImagesResponse.self).value
             print(response)
+            dogImages = response.message.compactMap { URL(string: $0) }
+            dogImageCollection.reloadData()
         } catch {
             print("Error: \(error.localizedDescription)")
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dogResponce?.message.count ?? 0
+        return dogImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "toCollection", for: indexPath) as? DogCollectionViewCell else {
             let errorCelll = UICollectionViewCell()
-            return errorCelll
+            return UICollectionViewCell()
         }
+        cell.configure(with: dogImages[indexPath.item])
         return cell
     }
     
-    
 }
-

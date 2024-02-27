@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8348BFAC2B845DA90081281F /* DogImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImageCollectionViewController.swift; sourceTree = "<group>"; };
+		8348BFAC2B845DA90081281F /* DogImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImageCollectionViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		836CD1852B82F734004813E6 /* GetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAPI.swift; sourceTree = "<group>"; };
 		836CD1872B830B0F004813E6 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
 		83AA24B72B7F4077000EC09F /* DogViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
