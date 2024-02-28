@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-    
+
 class DogImageCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     
@@ -20,9 +20,19 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        
+        let width = UIScreen.main.bounds.width / 2
+        layout.itemSize = CGSize(width: width, height: width)
+        
+        dogImageCollection.collectionViewLayout = layout
+        
         if let dogName = selectedDogName {
             navigationItem.title = dogName
-            
         }
         Task{
             await fetchDogImege()
