@@ -69,4 +69,15 @@ class DogImageCollectionViewController: UIViewController,UICollectionViewDelegat
         return cell
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetail" {
+            if let indexPath = self.dogImageCollection.indexPathsForSelectedItems?.first {
+                let selectedURL = dogImages[indexPath.item]
+                let dogDetailVC = segue.destination as! DogDetailViewController
+                dogDetailVC.imageURL = selectedURL
+            }
+        }
+    }
+    
 }
